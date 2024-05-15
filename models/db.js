@@ -2,16 +2,24 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  // host: '103.191.209.34' ,
-  // user: "ubzrnkmd_nirankari_mandal_user",
-  // password: "Nirankari@123",
-  // database: "ubzrnkmd_nirankari_mandal",
 
 
-  host: 'localhost' ,
-  user: "root",
-  password: "",
-  database: "eyeflow",
+  // host: '103.191.209.34',
+  // user: "ubzrnkmd_ecom_nyus",
+  // password: "Win@nyus",
+  // database: "ubzrnkmd_nyus_admin",
+
+  host: '103.191.209.34',
+  user: "ubzrnkmd_nyus_admin",
+  password: "Win@nyus",
+  database: "ubzrnkmd_ecom_nyus",
+
+  // host: 'localhost' ,
+  // user: "root",
+  // password: "",
+  // database: "eyeflow",
+
+  
 });
 
 pool.getConnection()
