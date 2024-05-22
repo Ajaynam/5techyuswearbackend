@@ -4,7 +4,7 @@ const cors = require('cors');
 const loginRoutes = require('./routes/authRoutes')
 const mysql = require('mysql2/promise'); 
 const productsRoute = require('./routes/productRoutes')
-
+const ordersRoute = require('./routes/orderRoutes')
 const loginRoute = require('./routes/authRoute')
 const adminRoute = require('./routes/userRoutes')
 
@@ -22,13 +22,15 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-// app.use('/auth', loginRoutes);
+
 
 app.use('/auth', loginRoute);
 app.use('/admin' , adminRoute);
 app.use('/products' , productsRoute);
+app.use('/orders' , ordersRoute);
 
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port http://localhost:${port}`);
 });
+

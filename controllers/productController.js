@@ -14,19 +14,12 @@ cloudinary.config({
 
 const createProduct = async (req, res) => {
   try {
-    const { ProductName, Category, Description, Price } = req.body;
-
-    // Access the uploaded file using req.file
+    const { ProductName, Category, Description, Price ,Discount ,Quantity} = req.body;
     const ProductImage = req.file.path;
-
-    // Upload image to Cloudinary
     const uploadResult = await cloudinary.uploader.upload(ProductImage);
-
-    // Delete temporary file
     fs.unlinkSync(ProductImage);
-
-    const sql = 'INSERT INTO products (ProductName, ProductImage, Category, Description, Price) VALUES (?, ?, ?, ?, ?)';
-    const result = await db.queryAsync(sql, [ProductName, uploadResult.secure_url, Category, Description, Price]);
+    const sql = 'INSERT INTO products (ProductName, ProductImage, Category, Description, Price ,Discount ,Quantity) VALUES (?, ?, ?, ?, ? ,?,?)';
+    const result = await db.queryAsync(sql, [ProductName, uploadResult.secure_url, Category, Description, Price ,Discount ,Quantity]);
 
     res.status(201).json({ message: 'Product created successfully', id: result.insertId });
   } catch (error) {
@@ -66,56 +59,20 @@ const getProductById = async (req, res) => {
 
 
 
-// const updateProduct = async (req, res) => {
-//   const { id } = req.params;
-//   const { ProductName, Category, Description, Price } = req.body;
-//   const ProductImage = req.file ? req.file.path : null;
-
-//   try {
-//     if (ProductImage) {
-//       // Upload new image to Cloudinary
-//       const uploadResult = await cloudinary.uploader.upload(ProductImage);
-
-//       // Delete temporary file
-//       fs.unlinkSync(ProductImage);
-
-//       ProductImage = uploadResult.secure_url;
-//     }
-
-//     const sql = 'UPDATE products SET ProductName = ?, ProductImage = ?, Category = ?, Description = ?, Price = ? WHERE id = ?';
-//     const result = await db.queryAsync(sql, [ProductName, ProductImage, Category, Description, Price, id]);
-
-//     if (result.affectedRows === 0) {
-//       res.status(404).json({ error: 'Product not found' });
-//     } else {
-//       res.status(200).json({ message: 'Product updated successfully' });
-//     }
-//   } catch (error) {
-//     console.error('Error updating product:', error);
-//     res.status(500).json({ error: 'Error updating product' });
-//   }
-// };
-
-
-
 const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { ProductName, Category, Description, Price } = req.body;
-  let ProductImage = req.file ? req.file.path : null; // Change const to let
+  const { ProductName, Category, Description, Price ,Discount ,Quantity} = req.body;
+  let ProductImage = req.file ? req.file.path : null; 
 
   try {
     if (ProductImage) {
-      // Upload new image to Cloudinary
       const uploadResult = await cloudinary.uploader.upload(ProductImage);
-
-      // Delete temporary file
       fs.unlinkSync(ProductImage);
-
       ProductImage = uploadResult.secure_url;
     }
 
-    const sql = 'UPDATE products SET ProductName = ?, ProductImage = ?, Category = ?, Description = ?, Price = ? WHERE id = ?';
-    const result = await db.queryAsync(sql, [ProductName, ProductImage, Category, Description, Price, id]);
+    const sql = 'UPDATE products SET ProductName = ?, ProductImage = ?, Category = ?, Description = ?, Price = ?, Discount =?, Quantity =?, WHERE id = ?';
+    const result = await db.queryAsync(sql, [ProductName, ProductImage, Category, Description, Price, Discount ,Quantity, id]);
 
     if (result.affectedRows === 0) {
       res.status(404).json({ error: 'Product not found' });
