@@ -5,15 +5,15 @@ const pool = mysql.createPool({
 
 
 
-  // host: '103.191.209.34',
-  // user: "ubzrnkmd_nyus_admin",
-  // password: "Win@nyus",
-  // database: "ubzrnkmd_ecom_nyus",
+  host: '103.191.209.34',
+  user: "ubzrnkmd_nyus_admin",
+  password: "Win@nyus",
+  database: "ubzrnkmd_ecom_nyus",
 
-  host: 'localhost' ,
-  user: "root",
-  password: "",
-  database: "eyeflow",
+  // host: 'localhost' ,
+  // user: "root",
+  // password: "",
+  // database: "eyeflow",
 
   
 });
