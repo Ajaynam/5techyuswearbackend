@@ -28,10 +28,12 @@ const createOrder = async (req, res) => {
       paymentScreenshotUrl = uploadResult.secure_url;
     }
 
-    const sql = 'INSERT INTO orders (cname, cemail, contactNo, address, state, zipCode, orderId, productId, productName, quantity, price, paymentTransactionNo, paymentScreenshot) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    const result = await db.queryAsync(sql, [cname, cemail, contactNo, address, state, zipCode, orderId, productId, productName, quantity, price, paymentTransactionNo, paymentScreenshotUrl]);
 
-    res.status(201).json({ message: 'Order created successfully', id: result.insertId ,orderId });
+    const sql = 'INSERT INTO orders (cname, cemail, contactNo, address, state, zipCode, orderId, productId, productName, quantity, price, paymentTransactionNo, paymentScreenshot , orderDate) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const orderDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const result = await db.queryAsync(sql, [cname, cemail, contactNo, address, state, zipCode, orderId, productId, productName, quantity, price, paymentTransactionNo, paymentScreenshotUrl ,orderDate]);
+
+    res.status(201).json({ message: 'Order created successfully', id: result.insertId, orderId });
   } catch (error) {
     console.error('Error creating order:', error);
     res.status(500).json({ error: 'Error creating order' });
