@@ -213,29 +213,6 @@ const updateProduct = async (req, res) => {
 
 
 
-// const updateProduct = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { ProductName, Category, Description, Price, Discount, Quantity } = req.body;
-//     const productImages = req.files.map((file) => file.path);
-
-//     console.log('req.files:', req.files);
-//     console.log('ProductImages:', productImages);
-
-//     const sql = 'UPDATE newproducts SET ProductName = ?, ProductImage = ?, Category = ?, Description = ?, Price = ?, Discount = ?, Quantity = ? WHERE id = ?';
-//     const result = await db.queryAsync(sql, [ProductName, JSON.stringify(productImages), Category, Description, Price, Discount, Quantity, id]);
-
-//     if (result.affectedRows === 0) {
-//       res.status(404).json({ error: 'Product not found' });
-//     } else {
-//       res.status(200).json({ message: 'Product updated successfully' });
-//     }
-//   } catch (error) {
-//     console.error('Error updating product:', error);
-//     res.status(500).json({ error: 'Error updating product' });
-//   }
-// };
-
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
