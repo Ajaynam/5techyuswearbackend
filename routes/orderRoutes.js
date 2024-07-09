@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const orderController = require('../controllers/orderController');
-const upload = require('../middleware/orderImage'); // Adjust this import based on your actual file structure
+const upload = require('../middleware/orderImage'); 
 const multer = require('multer');
 
 router.post('/new_order', upload.single('paymentScreenshot'), orderController.createOrder);

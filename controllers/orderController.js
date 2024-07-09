@@ -10,7 +10,6 @@ cloudinary.config({
   api_secret: 'OmseKOvrDC0U70cxxONFGUtluwo'
 });
 
-// Function to generate a unique 6-digit alphanumeric order ID
 const generateOrderId = () => {
   return crypto.randomBytes(3).toString('hex').toUpperCase(); // 6 digits alphanumeric
 };
